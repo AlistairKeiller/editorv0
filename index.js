@@ -15,7 +15,8 @@ server.on('connection', function(socket) {
   sockets.push(socket);
 
   socket.on('message', function(msg) {
-    sockets.forEach(s => s.send(msg.toString()));
+//     sockets.forEach(s => s.send(msg.toString()));
+    console.log(msg);
   });
 
   socket.on('close', function() {
