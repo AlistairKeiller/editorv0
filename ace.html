@@ -24,20 +24,12 @@
   });
 
   const ws = new WebSocket('ws://ec2-54-176-173-178.us-west-1.compute.amazonaws.com:8081');
-  settingValue = false;
   ws.onopen = function() {
     editor.getSession().on('change', function() {
-      if(!settingValue){
-        ws.send(editor.getValue());
-      }
+      ws.send(editor.getValue());
     });
   };
   ws.onmessage = function(msg) {
-    var currentPosition = editor.selection.getCursor();
-    settingValue = true;
     editor.setValue(msg.data);
-    settingValue = false;
-    editor.clearSelection();
-    editor.gotoLine(currentPosition.row, currentPosition.column);
   };
 </script>
