@@ -31,5 +31,5 @@
     });
   };
   ws.onmessage = function(msg) {
-    editor.setValue(msg);
+    editor.setValue(msg.data);
   };</script>
