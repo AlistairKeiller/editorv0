@@ -29,7 +29,7 @@
       ws.send(editor.getValue());
     });
   };
-//   ws.onmessage = function(msg) {
-//     editor.setValue(msg.data);
-//   };
+  ws.onmessage = function(msg) {
+    editor.setValue(msg.toString());
+  };
 </script>
