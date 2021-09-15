@@ -30,6 +30,8 @@
     });
   };
   ws.onmessage = function(msg) {
-    editor.setValue(msg.toString());
+	  console.log(msg)
+	  console.log(msg.toString());
+//     editor.setValue(msg.toString());
   };
 </script>
