@@ -16,6 +16,7 @@
 <script src="http://ajaxorg.github.io/ace-builds/src-min/ext-language_tools.js"></script>
 
 <script>require("ace/ext/language_tools");
+  settingValue = false;
   editor = ace.edit("editor");
   editor.setTheme("ace/theme/dracula");
   editor.session.setMode("ace/mode/java");
@@ -26,10 +27,14 @@
   const ws = new WebSocket('ws://ec2-54-176-173-178.us-west-1.compute.amazonaws.com:8081');
   ws.onopen = function() {
     editor.getSession().on('change', function() {
-      ws.send(editor.getValue());
+      if(!settingValue){
+        ws.send(editor.getValue());
+      }
     });
   };
   ws.onmessage = function(msg) {
+    settingValue = true;
     editor.setValue(msg.data);
+    settingValue = false;
   };
 </script>
