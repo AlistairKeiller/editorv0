@@ -27,6 +27,7 @@
   ws.onopen = function() {
     editor.getSession().on('change', function(delta) {
       ws.send(delta);
+      ws.send(delta.data);
     });
   };
 //   ws.onmessage = function(msg) {
