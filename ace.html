@@ -19,17 +19,17 @@
 	editor = ace.edit("editor");
   editor.setTheme("ace/theme/dracula");
   editor.session.setMode("ace/mode/java");
-  // editor.setOptions({
-  //   enableLiveAutocompletion: true
-  // });
+  editor.setOptions({
+    enableLiveAutocompletion: true
+  });
 
-  // const ws = new WebSocket('ws://test.alicaliknakala.repl.co:8081');
-  // ws.onopen = function() {
-  //   editor.setValue('');
-  //   editor.getSession().on('change', function() {
-  //     socket.send(editor.getSession.getValue());
-  //   });
-  // };
-  // ws.onmessage = function(msg) {
-  //   editor.setValue(msg);
-  // };</script>
+  const ws = new WebSocket('ws://http://ec2-54-176-173-178.us-west-1.compute.amazonaws.com:8081');
+  ws.onopen = function() {
+    editor.setValue('');
+    editor.getSession().on('change', function() {
+      socket.send(editor.getSession.getValue());
+    });
+  };
+  ws.onmessage = function(msg) {
+    editor.setValue(msg);
+  };</script>
