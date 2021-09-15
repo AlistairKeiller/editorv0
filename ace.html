@@ -29,7 +29,8 @@
       ws.send(JSON.stringify(delta));
     });
   };
-//   ws.onmessage = function(msg) {
+  ws.onmessage = function(msg) {
 //     editor.setValue(msg.data);
-//   };
+    console.log(msg);
+  };
 </script>
