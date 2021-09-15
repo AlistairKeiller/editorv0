@@ -31,6 +31,6 @@
   };
   ws.onmessage = function(msg) {
 //     editor.setValue(msg.data);
-    console.log(msg);
+    console.log(JSON.parse(msg.data));
   };
 </script>
