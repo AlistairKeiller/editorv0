@@ -25,8 +25,9 @@
 
   const ws = new WebSocket('ws://ec2-54-176-173-178.us-west-1.compute.amazonaws.com:8081');
   ws.onopen = function() {
-    editor.getSession().on('change', function() {
-      ws.send(editor.getValue());
+    editor.getSession().on('change', function(delta) {
+      console.log(delta);
+//       ws.send(editor.getValue());
     });
   };
   ws.onmessage = function(msg) {
