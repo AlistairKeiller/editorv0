@@ -35,6 +35,7 @@
   ws.onmessage = function(msg) {
     settingValue = true;
     editor.setValue(msg.data);
+    editor.clearSelection()
     settingValue = false;
   };
 </script>
