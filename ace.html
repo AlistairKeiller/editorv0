@@ -27,7 +27,7 @@
   ws.onopen = function() {
     editor.setValue('');
     editor.getSession().on('change', function() {
-      ws.send(editor.getSession.getValue());
+      ws.send(editor.getValue());
     });
   };
   ws.onmessage = function(msg) {
