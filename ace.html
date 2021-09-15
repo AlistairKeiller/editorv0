@@ -25,12 +25,11 @@
 
   const ws = new WebSocket('ws://ec2-3-101-149-148.us-west-1.compute.amazonaws.com:8081');
   ws.onopen = function() {
-    editor.getSession().on('change', function(delta) {
-      console.log(delta);
-//       ws.send(editor.getValue());
+    editor.getSession().on('change', function(delta) 
+      ws.send(delta);
     });
   };
-  ws.onmessage = function(msg) {
-    editor.setValue(msg.data);
-  };
+//   ws.onmessage = function(msg) {
+//     editor.setValue(msg.data);
+//   };
 </script>
