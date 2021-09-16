@@ -52,7 +52,8 @@ const ace = `<script src="http://ajaxorg.github.io/ace-builds/src-min/ace.js"></
 wss = new (require('ws').Server)({server: server});
 
 wss.on('connection', function(ws, request) {
-  console.log(request.url);
+//   console.log(request.url);
+  console.log(Object.fromEntries(Object.entries(dict).filter(([k,v]) => v.contains("asdfasdf"))));
 //   socket.on('message', function(msg) {
 // //     sockets.filter(s => s !== socket).forEach(s => s.send(msg.toString()));
 //   });
