@@ -41,10 +41,6 @@ const WebSocketServer = require('ws').Server, ace = `<style>#editor {
     eventsOn = true;
   };
 </script>`
-// var ace, WebSocketServer = require('ws').Server;
-// require('fs').readFile('ace.html', function (err, data) {
-//   ace = data;
-// });
 
 require('http').createServer(function (req, res) {
   res.end(ace);
