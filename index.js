@@ -1,4 +1,4 @@
-const WebSocketServer = require('ws').Server, URLparse = require('url').parse, ace = `<style>#editor {
+const ace = `<style>#editor {
   position: absolute;
   top: 0;
   right: 0;
@@ -40,26 +40,27 @@ const WebSocketServer = require('ws').Server, URLparse = require('url').parse, a
 </script>`
 
 require('http').createServer(function (req, res) {
-  console.log(req.url);
-//   switch (req.url){
-//       case(
+//   extention = req.url.slice(1);
+//   if (parseInt(extention)) {
+//     port = parseInt(extention);
+    
+//   } else if (extention == "settings") {
+//   } else {
 //   }
-//   res.end(ace);
-  
+  res.end(ace);
 }).listen(8080);
 
-server = new WebSocketServer({
-  port: 8081
-});
-sockets = [];
+server = new (require('ws').Server)({port: 8081});
+// sockets = [];
 server.on('connection', function(socket) {
-  sockets.push(socket);
+  console.log(socket);
+//   sockets.push(socket);
 
-  socket.on('message', function(msg) {
-    sockets.filter(s => s !== socket).forEach(s => s.send(msg.toString()));
-  });
+//   socket.on('message', function(msg) {
+//     sockets.filter(s => s !== socket).forEach(s => s.send(msg.toString()));
+//   });
 
-  socket.on('close', function() {
-    sockets = sockets.filter(s => s !== socket);
-  });
+//   socket.on('close', function() {
+//     sockets = sockets.filter(s => s !== socket);
+//   });
 });
