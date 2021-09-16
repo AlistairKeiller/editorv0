@@ -51,10 +51,10 @@ require('http').createServer(function (req, res) {
   res.end(ace);
 }).listen();
 
-server = new (require('ws').Server)({port: 8080});
-sockets = [];
-server.on('connection', function(socket) {
-  console.log(socket);
+// server = new (require('ws').Server)({port: 8080});
+// sockets = [];
+// server.on('connection', function(socket) {
+//   console.log(socket);
 //   sockets.push(socket);
 
 //   socket.on('message', function(msg) {
@@ -64,4 +64,4 @@ server.on('connection', function(socket) {
 //   socket.on('close', function() {
 //     sockets = sockets.filter(s => s !== socket);
 //   });
-});
+// });
