@@ -11,7 +11,7 @@ const ace = `
 
 <div id="editor"></div>
 
-<script>require("ace/ext/language_tools");
+<script>ace.require("ace/ext/language_tools");
   editor = ace.edit("editor");
   editor.setTheme("ace/theme/dracula");
   editor.session.setMode("ace/mode/java");
