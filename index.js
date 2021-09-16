@@ -27,15 +27,15 @@ const ace = `<script defer src="http://ajaxorg.github.io/ace-builds/src-min/ace.
     });
   };
 
-//   ws.onmessage = function(msg) {
-//     msg = JSON.parse(msg.data);
-//     eventsOn = false;
-//     if(msg.action == "remove")
-//       editor.session.remove({start: msg.start, end: msg.end});
-//     else if(msg.action == "insert")
-//       editor.session.insert(msg.start, msg.lines.join("\n"));
-//     eventsOn = true;
-//   };
+  ws.onmessage = function(msg) {
+    msg = JSON.parse(msg.data);
+    eventsOn = false;
+    if(msg.action == "remove")
+      editor.session.remove({start: msg.start, end: msg.end});
+    else if(msg.action == "insert")
+      editor.session.insert(msg.start, msg.lines.join("\n"));
+    eventsOn = true;
+  };
 </script>`
 
 require('http').createServer(function (req, res) {
