@@ -30,7 +30,7 @@
     });
   };
   ws.onmessage = function(msg) {
-//     editor.setValue(msg.data);
-    console.log(JSON.parse(msg.data));
+//     console.log(JSON.parse(msg.data));
+    editor.insert("\n");
   };
 </script>
