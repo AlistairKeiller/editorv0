@@ -1,4 +1,5 @@
-const ace = `<style>#editor {
+const ace = `<script defer src="http://ajaxorg.github.io/ace-builds/src-min/ace.js"></script><script defer src="http://ajaxorg.github.io/ace-builds/src-min/ext-language_tools.js"></script>
+<style>#editor {
   position: absolute;
   top: 0;
   right: 0;
@@ -8,8 +9,6 @@ const ace = `<style>#editor {
 
 <div id="editor"></div>
 
-<script defer src="http://ajaxorg.github.io/ace-builds/src-min/ace.js"></script>
-<script defer src="http://ajaxorg.github.io/ace-builds/src-min/ext-language_tools.js"></script>
 <script>require("ace/ext/language_tools");
   editor = ace.edit("editor");
   editor.setTheme("ace/theme/dracula");
