@@ -27,7 +27,7 @@
   userChanging = true;
   ws.onopen = function() {
     editor.getSession().on('change', function(delta) {
-      if(userChanging)
+      if (userChanging)
         ws.send(JSON.stringify(delta));
     });
     editor.session.selection.on('changeCursor', function() {
