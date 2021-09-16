@@ -15,9 +15,9 @@ const ace = `<script src="http://ajaxorg.github.io/ace-builds/src-min/ace.js"></
   editor.session.setMode("ace/mode/java");
   editor.setOptions({enableLiveAutocompletion: true});
   
-  console.log(window.location);
+  console.log('ws://54.193.138.138?name=test&pathname=' + window.location.pathname);
   
-  const ws = new WebSocket('ws://54.193.138.138?name=test&pathname=' + window.location.pathname);
+//   const ws = new WebSocket('ws://54.193.138.138?name=test&pathname=' + window.location.pathname);
   eventsOn = true;
 
   ws.onopen = function() {
