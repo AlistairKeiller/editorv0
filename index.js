@@ -15,7 +15,7 @@ const ace = `<script src="http://ajaxorg.github.io/ace-builds/src-min/ace.js"></
   editor.session.setMode("ace/mode/java");
   editor.setOptions({enableLiveAutocompletion: true});
 
-  const ws = new WebSocket('ws://54.193.138.138:8080/Alistair');
+  const ws = new WebSocket('ws://54.193.138.138:8080?name=Alistair');
   eventsOn = true;
 
   ws.onopen = function() {
