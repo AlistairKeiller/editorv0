@@ -48,16 +48,16 @@ require('http').createServer(function (req, res) {
 }).listen(80);
 
 server = new (require('ws').Server)({port: 8081});
-// sockets = [];
+sockets = [];
 server.on('connection', function(socket) {
-  console.log(socket);
-//   sockets.push(socket);
+  sockets.push(socket);
 
-//   socket.on('message', function(msg) {
+  socket.on('message', function(msg) {
+    console.log(msg);
 //     sockets.filter(s => s !== socket).forEach(s => s.send(msg.toString()));
-//   });
+  });
 
-//   socket.on('close', function() {
-//     sockets = sockets.filter(s => s !== socket);
-//   });
+  socket.on('close', function() {
+    sockets = sockets.filter(s => s !== socket);
+  });
 });
