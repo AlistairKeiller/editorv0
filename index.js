@@ -53,7 +53,9 @@ wss = new (require('ws').Server)({server: server});
 
 wss.on('connection', function(ws, request) {
   console.log(request.url);
-  console.log(([request]).filter((i,n) => typeof n === 'string'));
+  for(const key in request)
+    if (request[key] instanceof String)
+      console.log(request[key]);
 //   socket.on('message', function(msg) {
 // //     sockets.filter(s => s !== socket).forEach(s => s.send(msg.toString()));
 //   });
