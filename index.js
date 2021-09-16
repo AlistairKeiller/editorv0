@@ -33,7 +33,7 @@ const ace = `
     if(msg.action == "remove")
       editor.session.remove({start: msg.start, end: msg.end});
     else if(msg.action == "insert")
-      editor.session.insert(msg.start, msg.lines.join("\n"));
+      editor.session.insert(msg.start, msg.lines.join('\n'));
     eventsOn = true;
   };
 </script>`
