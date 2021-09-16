@@ -51,7 +51,7 @@ require('http').createServer(function (req, res) {
   res.end(ace);
 }).listen();
 
-server = new (require('ws').Server)();
+server = new (require('ws').Server)({port: 8080});
 sockets = [];
 server.on('connection', function(socket) {
   console.log(socket);
