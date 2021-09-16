@@ -7,9 +7,9 @@ const ace = `<script defer src="http://ajaxorg.github.io/ace-builds/src-min/ace.
   left: 0;
 }</style>
 
-// <div id="editor"></div>
+<div id="editor"></div>
 
-<script>//require("ace/ext/language_tools");
+<script>// require("ace/ext/language_tools");
 //   editor = ace.edit("editor");
 //   editor.setTheme("ace/theme/dracula");
 //   editor.session.setMode("ace/mode/java");
