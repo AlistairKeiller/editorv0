@@ -50,7 +50,7 @@ const ace = `<script src="http://ajaxorg.github.io/ace-builds/src-min/ace.js"></
 })
 
 wss = new (require('ws').Server)({server: server});
-wss.on('connection', function(ws, request, client) {
+wss.on('connection', function(ws, request) {
   console.log(request);
   console.log(client);
 //   socket.on('message', function(msg) {
