@@ -30,7 +30,7 @@
       if(userChanging)
         ws.send(JSON.stringify(delta));
     });
-    editor.session.selection.on('changeCursor', function(e) {
+    editor.session.selection.on('changeCursor', function() {
       console.log(e);
     });
   };
