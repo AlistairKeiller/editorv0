@@ -36,9 +36,7 @@ const ace = `<script src="http://ajaxorg.github.io/ace-builds/src-min/ace.js"></
   };
 </script>`, settings = `
 
-`;
-
-require('http').createServer(function (req, res) {
+`, server = require('http').createServer(function (req, res) {
 //   extention = req.url.slice(1);
 //   if (extention == "settings") {
     
@@ -49,19 +47,14 @@ require('http').createServer(function (req, res) {
 //   } else  else {
 //   }
   res.end(ace);
-}).listen(80);
+})
 
-server = new (require('ws').Server)({port: 8080});
-sockets = [];
-server.on('connection', function(socket) {
-  console.log(socket);
-//   sockets.push(socket);
-
+wss = new (require('ws').Server)({server: server});
+wss.on('connection', function(ws, request, client) {
+  console.log(client);
 //   socket.on('message', function(msg) {
 // //     sockets.filter(s => s !== socket).forEach(s => s.send(msg.toString()));
 //   });
-
-//   socket.on('close', function() {
-//     sockets = sockets.filter(s => s !== socket);
-//   });
 });
+
+server.listen(80);
