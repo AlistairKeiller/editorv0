@@ -9,8 +9,8 @@ const ace = `
 
 <div id="editor"></div>
 
-<script defer src="http://ajaxorg.github.io/ace-builds/src-min/ace.js"></script>
-<script defer src="http://ajaxorg.github.io/ace-builds/src-min/ext-language_tools.js"></script>
+<script src="http://ajaxorg.github.io/ace-builds/src-min/ace.js"></script>
+<script src="http://ajaxorg.github.io/ace-builds/src-min/ext-language_tools.js"></script>
 <script>ace.require("ace/ext/language_tools");
   editor = ace.edit("editor");
   editor.setTheme("ace/theme/dracula");
