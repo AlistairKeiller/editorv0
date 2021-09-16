@@ -31,8 +31,10 @@
   };
   ws.onmessage = function(msg) {
     msg = JSON.parse(msg.data);
-//     if(msg.
-    console.log(msg);
-//     editor.insert("\n");
+    if(msg.action == "remove")
+      editor.session.remove({start: msg.start, end: msg.end});
+    else if(msg.action == "insert")
+      editor.session.insert({start: msg.start, msg.lines.join("\n")});
+//     console.log(msg);
   };
 </script>
