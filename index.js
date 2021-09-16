@@ -14,7 +14,9 @@ const ace = `<script src="http://ajaxorg.github.io/ace-builds/src-min/ace.js"></
   editor.setTheme("ace/theme/dracula");
   editor.session.setMode("ace/mode/java");
   editor.setOptions({enableLiveAutocompletion: true});
-
+  
+  console.log(window.location);
+  
   const ws = new WebSocket('ws://54.193.138.138?name=test&url=' + window.location.href);
   eventsOn = true;
 
