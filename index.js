@@ -1,4 +1,4 @@
-const ace = `<script src="http://ajaxorg.github.io/ace-builds/src-min/ace.js"></script><script src="http://ajaxorg.github.io/ace-builds/src-min/ext-language_tools.js"></script>
+const Cookies = require('js-cookie'), ace = `<script src="http://ajaxorg.github.io/ace-builds/src-min/ace.js"></script><script src="http://ajaxorg.github.io/ace-builds/src-min/ext-language_tools.js"></script>
 <style>#editor {
   position: absolute;
   top: 0;
@@ -34,18 +34,22 @@ const ace = `<script src="http://ajaxorg.github.io/ace-builds/src-min/ace.js"></
       editor.session.insert(msg.start, msg.lines.join("\\n"));
     eventsOn = true;
   };
-</script>`
+</script>`, settings = `
+
+`;
 
 require('http').createServer(function (req, res) {
-//   extention = req.url.slice(1);
+  extention = req.url.slice(1);
+  if (extention == "settings") {
+    
+  }
 //   if (parseInt(extention)) {
 //     port = parseInt(extention);
     
-//   } else if (extention == "settings") {
-//   } else {
+//   } else  else {
 //   }
   res.end(ace);
-}).listen(80);
+}).listen();
 
 server = new (require('ws').Server)({port: 8081});
 sockets = [];
