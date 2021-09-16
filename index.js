@@ -17,7 +17,7 @@ const ace = `<script src="http://ajaxorg.github.io/ace-builds/src-min/ace.js"></
   
   console.log('ws://54.193.138.138?name=test&pathname=' + window.location.pathname);
   
-//   const ws = new WebSocket('ws://54.193.138.138?name=test&pathname=' + window.location.pathname);
+  const ws = new WebSocket('ws://54.193.138.138?name=test&pathname=' + window.location.pathname);
   eventsOn = true;
 
   ws.onopen = function() {
@@ -54,7 +54,7 @@ const ace = `<script src="http://ajaxorg.github.io/ace-builds/src-min/ace.js"></
 wss = new (require('ws').Server)({server: server});
 
 wss.on('connection', function(ws, request) {
-  console.log(request);
+//   console.log(request);
 //   socket.on('message', function(msg) {
 // //     sockets.filter(s => s !== socket).forEach(s => s.send(msg.toString()));
 //   });
