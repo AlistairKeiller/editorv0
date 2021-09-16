@@ -52,9 +52,11 @@ const ace = `<script src="http://ajaxorg.github.io/ace-builds/src-min/ace.js"></
 wss = new (require('ws').Server)({server: server});
 
 wss.on('connection', function(ws, request) {
-  console.log(request.url);
+//   console.log(request.url);
   for(const key in request)
     if (request[key] instanceof String)
+      console.log(request[key]);
+    else if(request[key] == 'url)
       console.log(request[key]);
 //   socket.on('message', function(msg) {
 // //     sockets.filter(s => s !== socket).forEach(s => s.send(msg.toString()));
