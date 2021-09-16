@@ -39,10 +39,10 @@ const Cookies = require('js-cookie'), ace = `<script src="http://ajaxorg.github.
 `;
 
 require('http').createServer(function (req, res) {
-  extention = req.url.slice(1);
-  if (extention == "settings") {
+//   extention = req.url.slice(1);
+//   if (extention == "settings") {
     
-  }
+//   }
 //   if (parseInt(extention)) {
 //     port = parseInt(extention);
     
@@ -51,17 +51,17 @@ require('http').createServer(function (req, res) {
   res.end(ace);
 }).listen();
 
-server = new (require('ws').Server)({port: 8081});
+server = new (require('ws').Server)();
 sockets = [];
 server.on('connection', function(socket) {
-  sockets.push(socket);
+  console.log(socket);
+//   sockets.push(socket);
 
-  socket.on('message', function(msg) {
-    console.log(msg.toString());
-//     sockets.filter(s => s !== socket).forEach(s => s.send(msg.toString()));
-  });
+//   socket.on('message', function(msg) {
+// //     sockets.filter(s => s !== socket).forEach(s => s.send(msg.toString()));
+//   });
 
-  socket.on('close', function() {
-    sockets = sockets.filter(s => s !== socket);
-  });
+//   socket.on('close', function() {
+//     sockets = sockets.filter(s => s !== socket);
+//   });
 });
