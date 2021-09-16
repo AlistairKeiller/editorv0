@@ -24,23 +24,25 @@
   });
 
   const ws = new WebSocket('ws://ec2-52-53-217-34.us-west-1.compute.amazonaws.com:8081');
-  userChanging = true;
+  eventsOn = true;
+
   ws.onopen = function() {
     editor.getSession().on('change', function(delta) {
-      if (userChanging)
+      if (eventsOn)
         ws.send(JSON.stringify(delta));
     });
-    editor.session.selection.on('changeCursor', function() {
+    editor.session.selection.on('changeCursor', function(e) {
       console.log("test");
     });
   };
+
   ws.onmessage = function(msg) {
     msg = JSON.parse(msg.data);
-    userChanging = false;
+    eventsOn = false;
     if(msg.action == "remove")
       editor.session.remove({start: msg.start, end: msg.end});
     else if(msg.action == "insert")
       editor.session.insert(msg.start, msg.lines.join("\n"));
-    userChanging = true;
+    eventsOn = true;
   };
 </script>
