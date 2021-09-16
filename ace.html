@@ -23,7 +23,7 @@
     enableLiveAutocompletion: true
   });
 
-  const ws = new WebSocket('ws://ec2-3-101-149-148.us-west-1.compute.amazonaws.com:8081');
+  const ws = new WebSocket('ws://ec2-52-53-217-34.us-west-1.compute.amazonaws.com:8081');
   userChanging = true;
   ws.onopen = function() {
     editor.getSession().on('change', function(delta) {
