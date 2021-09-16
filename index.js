@@ -1,4 +1,4 @@
-const WebSocketServer = require('ws').Server, ace = `<style>#editor {
+const WebSocketServer = require('ws').Server, URLparse = require('url').parse, ace = `<style>#editor {
   position: absolute;
   top: 0;
   right: 0;
@@ -40,7 +40,12 @@ const WebSocketServer = require('ws').Server, ace = `<style>#editor {
 </script>`
 
 require('http').createServer(function (req, res) {
-  res.end(ace);
+  console.log(URLparse(req.url));
+//   switch (URLparse(req.url).pathname){
+//       case(
+//   }
+//   res.end(ace);
+  
 }).listen(8080);
 
 server = new WebSocketServer({
