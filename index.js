@@ -7,18 +7,18 @@ const ace = `<script defer src="http://ajaxorg.github.io/ace-builds/src-min/ace.
   left: 0;
 }</style>
 
-<div id="editor"></div>
+// <div id="editor"></div>
 
-<script>require("ace/ext/language_tools");
-  editor = ace.edit("editor");
-  editor.setTheme("ace/theme/dracula");
-  editor.session.setMode("ace/mode/java");
-  editor.setOptions({
-    enableLiveAutocompletion: true
-  });
+<script>//require("ace/ext/language_tools");
+//   editor = ace.edit("editor");
+//   editor.setTheme("ace/theme/dracula");
+//   editor.session.setMode("ace/mode/java");
+//   editor.setOptions({
+//     enableLiveAutocompletion: true
+//   });
 
-  const ws = new WebSocket('ws://54.193.138.138:8081');
-  eventsOn = true;
+//   const ws = new WebSocket('ws://54.193.138.138:8081');
+//   eventsOn = true;
 
   ws.onopen = function() {
     editor.session.on('change', function(delta) {
@@ -27,15 +27,15 @@ const ace = `<script defer src="http://ajaxorg.github.io/ace-builds/src-min/ace.
     });
   };
 
-  ws.onmessage = function(msg) {
-    msg = JSON.parse(msg.data);
-    eventsOn = false;
-    if(msg.action == "remove")
-      editor.session.remove({start: msg.start, end: msg.end});
-    else if(msg.action == "insert")
-      editor.session.insert(msg.start, msg.lines.join("\n"));
-    eventsOn = true;
-  };
+//   ws.onmessage = function(msg) {
+//     msg = JSON.parse(msg.data);
+//     eventsOn = false;
+//     if(msg.action == "remove")
+//       editor.session.remove({start: msg.start, end: msg.end});
+//     else if(msg.action == "insert")
+//       editor.session.insert(msg.start, msg.lines.join("\n"));
+//     eventsOn = true;
+//   };
 </script>`
 
 require('http').createServer(function (req, res) {
