@@ -15,9 +15,7 @@ const ace = `<script src="http://ajaxorg.github.io/ace-builds/src-min/ace.js"></
   editor.session.setMode("ace/mode/java");
   editor.setOptions({enableLiveAutocompletion: true});
   
-  console.log('ws://54.193.138.138?name=test&pathname=' + window.location.pathname);
-  
-  const ws = new WebSocket('ws://54.193.138.138?name=test&pathname=' + window.location.pathname);
+  const ws = new WebSocket('ws://54.193.138.138?name=test&pathname=' + window.location.pathname.slice(1));
   eventsOn = true;
 
   ws.onopen = function() {
@@ -54,7 +52,7 @@ const ace = `<script src="http://ajaxorg.github.io/ace-builds/src-min/ace.js"></
 wss = new (require('ws').Server)({server: server});
 
 wss.on('connection', function(ws, request) {
-  console.log(request);
+  console.log(request.search);
 //   socket.on('message', function(msg) {
 // //     sockets.filter(s => s !== socket).forEach(s => s.send(msg.toString()));
 //   });
