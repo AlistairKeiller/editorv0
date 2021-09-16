@@ -49,7 +49,7 @@ require('http').createServer(function (req, res) {
 //   } else  else {
 //   }
   res.end(ace);
-}).listen();
+}).listen(80);
 
 // server = new (require('ws').Server)({port: 8080});
 // sockets = [];
