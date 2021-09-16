@@ -17,7 +17,7 @@ const ace = `<script src="http://ajaxorg.github.io/ace-builds/src-min/ace.js"></
   
   console.log(window.location);
   
-  const ws = new WebSocket('ws://54.193.138.138?name=test&url=' + window.location.href);
+  const ws = new WebSocket('ws://54.193.138.138?name=test&pathname=' + window.location.pathname);
   eventsOn = true;
 
   ws.onopen = function() {
