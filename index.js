@@ -40,8 +40,8 @@ const WebSocketServer = require('ws').Server, URLparse = require('url').parse, a
 </script>`
 
 require('http').createServer(function (req, res) {
-  console.log(req);
-//   switch (URLparse(req.url).pathname){
+  console.log(req.url);
+//   switch (req.url){
 //       case(
 //   }
 //   res.end(ace);
