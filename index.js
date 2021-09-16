@@ -18,7 +18,7 @@ const WebSocketServer = require('ws').Server, ace = `<style>#editor {
     enableLiveAutocompletion: true
   });
 
-  const ws = new WebSocket('ws://ec2-52-53-217-34.us-west-1.compute.amazonaws.com:8081');
+  const ws = new WebSocket('ws://54.193.138.138:8081');
   eventsOn = true;
 
   ws.onopen = function() {
