@@ -30,6 +30,9 @@
       if(userChanging)
         ws.send(JSON.stringify(delta));
     });
+    editor.session.selection.on('changeCursor', function(e) {
+      console.log(e);
+    });
   };
   ws.onmessage = function(msg) {
     msg = JSON.parse(msg.data);
