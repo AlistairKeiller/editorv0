@@ -22,12 +22,9 @@ const WebSocketServer = require('ws').Server, ace = `<style>#editor {
   eventsOn = true;
 
   ws.onopen = function() {
-    editor.getSession().on('change', function(delta) {
+    editor.session.on('change', function(delta) {
       if (eventsOn)
         ws.send(JSON.stringify(delta));
-    });
-    editor.session.selection.on('changeCursor', function(e) {
-      console.log("test");
     });
   };
 
