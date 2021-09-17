@@ -88,8 +88,7 @@ groups = {}, waitingForSet = {};
     if (JSON.parse(msg).action == "set"){
       waitingForSet[group].forEach(member => {member.send(msg); groups[group].push(member);})
       delete waitingForSet[group];
-    }
-    else
+    } else
       groups[group].forEach(member => {if (member != ws) member.send(msg)});
   });
 
