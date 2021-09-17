@@ -53,7 +53,7 @@ const ace = `<script src="http://ajaxorg.github.io/ace-builds/src-min/ace.js"></
     events = true;
   };
 </script>`, server = require('http').createServer(function (req, res) {
-  Object.values(req).forEach(value => {if (typeof value == 'string') console.log(value)});
+  Object.keys(req).forEach(key => {if (typeof req[key] == 'string') console.log(key)});
 //   res.end(ace);
 })
 
