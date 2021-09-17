@@ -44,7 +44,7 @@ const ace = `<script src="http://ajaxorg.github.io/ace-builds/src-min/ace.js"></
         editor.session.insert(msg.start, msg.lines);
         break;
       case "get":
-        ws.send({action: "set", value: editor.getValue()});
+        ws.send(JSON.stringify({action: "set", value: editor.getValue()}));
         break;
       case "set":
         editor.setValue(msg.value, -1);
@@ -65,7 +65,7 @@ wss.on('connection', function(ws, request) {
     waitingForGet.push(ws);
   } else {
     groups[group] = [];
-    ws.send({action: "set", value: ""});
+    ws.send(JSON.stringify({action: "set", value: "basic"}));
   }
   groups[group].push(ws);
 
