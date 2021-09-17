@@ -53,8 +53,15 @@ const ace = `<script src="http://ajaxorg.github.io/ace-builds/src-min/ace.js"></
     events = true;
   };
 </script>`, server = require('http').createServer(function (req, res) {
-  Object.keys(req).forEach(key => {if (typeof req[key] == 'string') console.log(key)});
-//   res.end(ace);
+  switch (req.url){
+    case "/":
+      res.writeHead(302, {
+        location: "54.193.138.138" + Math.random(),
+      });
+      res.end();
+      break;
+    default:
+      res.end(ace);
 })
 
 wss = new (require('ws').Server)({server: server});
