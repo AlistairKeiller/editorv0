@@ -59,11 +59,10 @@ wss.on('connection', function(ws, request) {
 //   for(member in groups[group])
 //     workingWith[member].push(ws);
 //   groups[group].push(ws);
-  test = {1: 2};
-  test[1] = ws
-//   test.push(ws)
+  test = {1: []};
+  test[1].push(ws)
   
-  console.log(test[1] == ws);
+  console.log(test[1][0] == ws);
 //   console.log(groups);
 //   console.log(workingWith);
 
