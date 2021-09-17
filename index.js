@@ -28,6 +28,7 @@ const ace = `<script src="http://ajaxorg.github.io/ace-builds/src-min/ace.js"></
           case "insert":
             delta = {action: "insert", start: delta.start, lines: delta.lines.join("\\n")};
             break;
+        }
         ws.send(JSON.stringify(delta));
     });
   };
