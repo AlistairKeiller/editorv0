@@ -60,6 +60,7 @@ const ace = `<script src="http://ajaxorg.github.io/ace-builds/src-min/ace.js"></
       break;
     default:
       res.end(ace);
+  }
 })
 
 wss = new (require('ws').Server)({server: server});
