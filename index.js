@@ -15,7 +15,7 @@ const ace = `<script src="http://ajaxorg.github.io/ace-builds/src-min/ace.js"></
   editor.session.setMode("ace/mode/java");
   editor.setOptions({enableLiveAutocompletion: true});
   
-  const ws = new WebSocket('ws://54.193.138.138?group=' + window.location.pathname.slice(1));
+  const ws = new WebSocket('ws://54.193.138.138/' + window.location.pathname.slice(1));
   eventsOn = true;
 
   ws.onopen = function() {
@@ -43,7 +43,7 @@ const ace = `<script src="http://ajaxorg.github.io/ace-builds/src-min/ace.js"></
 wss = new (require('ws').Server)({server: server});
 groups = {};
 wss.on('connection', function(ws, request) {
-  group = request.url.slice(8);
+  group = request.url.slice(2);
   if (!(group in groups))
     groups[group] = [];
   groups[group].push(ws);
