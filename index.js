@@ -14,7 +14,7 @@ const ace = `<script src="http://ajaxorg.github.io/ace-builds/src-min/ace.js"></
   editor.setTheme("ace/theme/dracula");
   editor.session.setMode("ace/mode/java");
   editor.setOptions({enableLiveAutocompletion: true});
-  
+
   const ws = new WebSocket('ws://54.193.138.138/' + window.location.pathname.slice(1));
   events = true;
 
@@ -35,22 +35,26 @@ const ace = `<script src="http://ajaxorg.github.io/ace-builds/src-min/ace.js"></
 
   ws.onmessage = function(msg) {
     msg = JSON.parse(msg.data);
-    events = false;
     switch (msg.action){
       case "remove":
+        events = false;
         editor.session.remove({start: msg.start, end: msg.end});
+        events = true;
         break;
       case "insert":
+        events = false;
         editor.session.insert(msg.start, msg.lines);
+        events = true;
         break;
       case "get":
         ws.send(JSON.stringify({action: "set", value: editor.getValue()}));
         break;
       case "set":
+        events = false;
         editor.setValue(msg.value, -1);
+        events = true;
         break;
     }
-    events = true;
   };
 </script>`, basic = `class Main {
   public static void main(String[] args) {
