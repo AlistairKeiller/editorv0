@@ -44,10 +44,8 @@ wss = new (require('ws').Server)({server: server});
 workingWith = {}, groups = {};
 wss.on('connection', function(ws, request) {
   group = (new URLSearchParams(request.url.slice(1))).get('group');
-  if (!(group in groups)){
-    console.log("test");
+  if (!(group in groups))
     groups[group] = [];
-  }
   workingWith[ws] = groups[group];
   groups[group].forEach(member => workingWith[member].push(ws));
   groups[group].push(ws);
