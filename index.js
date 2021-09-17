@@ -16,36 +16,56 @@ const ace = `<script src="http://ajaxorg.github.io/ace-builds/src-min/ace.js"></
   editor.setOptions({enableLiveAutocompletion: true});
   
   const ws = new WebSocket('ws://54.193.138.138/' + window.location.pathname.slice(1));
-  eventsOn = true;
+  events = true;
 
   ws.onopen = function() {
     editor.session.on('change', function(delta) {
-      if (eventsOn)
+      if (events)
+        switch (delta.action){
+          case "remove":
+            delta = {start: delta.start, end: delta.end};
+            break;
+          case "insert"
+            delta = {start: delta.start, lines = delta.lines.join("\\n")}
+            break;
         ws.send(JSON.stringify(delta));
     });
   };
 
   ws.onmessage = function(msg) {
     msg = JSON.parse(msg.data);
-    eventsOn = false;
-    if(msg.action == "remove")
-      editor.session.remove({start: msg.start, end: msg.end});
-    else if(msg.action == "insert")
-      editor.session.insert(msg.start, msg.lines.join("\\n"));
-    eventsOn = true;
+    events = false;
+    switch (msg.action){
+      case "remove":
+        editor.session.remove(msg);
+        break;
+      case "insert":
+        editor.session.insert(msg.start, msg.lines);
+        break;
+      case "get":
+        ws.send(editor.getValue());
+        break;
+      case "set":
+        editor.setValue(msg.value, -1);
+        break;
+    }
+    events = true;
   };
-</script>`, settings = `
-
-`, server = require('http').createServer(function (req, res) {
+</script>`, server = require('http').createServer(function (req, res) {
   res.end(ace);
 })
 
 wss = new (require('ws').Server)({server: server});
-groups = {};
+groups = {}, waitingForGet = [];
 wss.on('connection', function(ws, request) {
   group = request.url.slice(2);
-  if (!(group in groups))
+  if (group in groups){
+    groups[group][0].send({action: "get"});
+    waitingForGet.push(ws);
+  } else {
     groups[group] = [];
+    ws.send({action: "set", value: ""});
+  }
   groups[group].push(ws);
 
   ws.on('message', function(msg) {
