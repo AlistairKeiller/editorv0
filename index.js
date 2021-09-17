@@ -20,7 +20,7 @@ const ace = `<script src="http://ajaxorg.github.io/ace-builds/src-min/ace.js"></
 
   ws.onopen = function() {
     editor.session.on('change', function(delta) {
-      if (events)
+      if (events) {
         switch (delta.action){
           case "remove":
             delta = {action: "remove", start: delta.start, end: delta.end};
@@ -29,7 +29,8 @@ const ace = `<script src="http://ajaxorg.github.io/ace-builds/src-min/ace.js"></
             delta = {action: "insert", start: delta.start, lines: delta.lines.join("\\n")};
             break;
         }
-        ws.send(JSON.stringify(delta));
+      }
+      ws.send(JSON.stringify(delta));
     });
   };
 
