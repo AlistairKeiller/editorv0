@@ -81,11 +81,8 @@ wss.on('connection', function(ws, request) {
 
   ws.on('close', function() {
     groups[group] = groups[group].filter(member => member != ws);
-    console.log("test")
-    if(groups[group].length == 0){
+    if(groups[group].length == 0)
        delete groups[group];
-      console.log("test2")
-    }
   });
 });
 
