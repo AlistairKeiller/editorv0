@@ -49,7 +49,8 @@ wss.on('connection', function(ws, request) {
   groups[group].push(ws);
 
   ws.on('message', function(msg) {
-    groups[group].forEach(member => {if (!(member == ws) member.send(msg.toString());});
+    groups[group].forEach(member => {if (!(member == ws)
+                                         member.send(msg.toString());});
   });
 
   ws.on('close', function() {
