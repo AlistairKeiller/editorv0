@@ -79,7 +79,7 @@ wss.on('connection', function(ws, request) {
 
   ws.on('close', function() {
 //     filteredgroup = groups[group]
-    groups[group] = (groups[group]).filter(member => member != ws);
+    groups[group] = groups[group].filter(member => member != ws);
 //     groups[group] = groups[group].filter(member => member != ws);
     if(groups[group].length == 0)
        delete groups[group];
