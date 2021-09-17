@@ -57,7 +57,7 @@ wss.on('connection', function(ws, request) {
     groups[group] = [];
   workingWith[ws] = groups[group];
   for(member in groups[group]){
-    console.log(member);
+    console.log(groups[group]);
 //     workingWith[member].push(ws);
   }
   groups[group].push(ws);
