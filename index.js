@@ -15,7 +15,7 @@ const ace = `<script src="http://ajaxorg.github.io/ace-builds/src-min/ace.js"></
   editor.session.setMode("ace/mode/java");
   editor.setOptions({enableLiveAutocompletion: true});
   
-  const ws = new WebSocket('ws://54.193.138.138/' + window.location.pathname);
+  const ws = new WebSocket('ws://54.193.138.138/' + window.location.pathname.slice(1));
   events = true;
 
   ws.onopen = function() {
@@ -55,7 +55,7 @@ const ace = `<script src="http://ajaxorg.github.io/ace-builds/src-min/ace.js"></
 </script>`, server = require('http').createServer(function (req, res) {
   switch (req.url){
     case "/":
-      res.writeHead(302, {location: Math.random().toString().slice(2)});
+      res.writeHead(302, {location: Math.random().toString().slice(1)});
       res.end();
       break;
     default:
