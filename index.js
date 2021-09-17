@@ -4,7 +4,7 @@ basic = `class Main {
   }
 }`, ace = '';
 
-
+require('fs').readFile('ace.html', (err, data) => ace = data);
 
 server = require('http').createServer(function (req, res) {
   switch (req.url){
