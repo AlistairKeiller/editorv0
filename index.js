@@ -55,7 +55,7 @@ const ace = `<script src="http://ajaxorg.github.io/ace-builds/src-min/ace.js"></
 </script>`, server = require('http').createServer(function (req, res) {
   switch (req.url){
     case "/":
-      res.writeHead(302, {location: Math.random()});
+      res.writeHead(302, {location: Math.random().toString().slice(2)});
       res.end();
       break;
     default:
