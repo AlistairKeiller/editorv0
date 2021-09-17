@@ -53,7 +53,12 @@ const ace = `<script src="http://ajaxorg.github.io/ace-builds/src-min/ace.js"></
     }
     events = true;
   };
-</script>`, server = require('http').createServer(function (req, res) {
+</script>`, basic = `class Main {
+  public static void main(String[] args) {
+    System.out.println("Hello world!");
+  }
+}`
+server = require('http').createServer(function (req, res) {
   switch (req.url){
     case "/":
       res.writeHead(302, {location: Math.random().toString().slice(2)});
@@ -73,7 +78,7 @@ wss.on('connection', function(ws, request) {
     waitingForSet.push(ws);
   } else {
     groups[group] = [];
-    ws.send(JSON.stringify({action: "set", value: "basic"}));
+    ws.send(JSON.stringify({action: "set", value: basic}));
   }
   groups[group].push(ws);
 
