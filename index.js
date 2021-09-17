@@ -41,30 +41,22 @@ const ace = `<script src="http://ajaxorg.github.io/ace-builds/src-min/ace.js"></
 })
 
 wss = new (require('ws').Server)({server: server});
-workingWith = {}, groups = {};
+groups = {};
 wss.on('connection', function(ws, request) {
-  group = (new URLSearchParams(request.url.slice(1))).get('group');
+  group = request.url.slice(8);
   if (!(group in groups))
     groups[group] = [];
-  workingWith[ws] = groups[group];
-  console.log(1, groups);
-  groups[group].forEach(member => console.log(workingWith[member]));//workingWith[member].push(ws));
-  console.log(2, groups);
   groups[group].push(ws);
-  
-  console.log(3, groups);
 
   ws.on('message', function(msg) {
-    workingWith[ws].forEach(member => member.send(msg.toString()));
+    groups[group].forEach(member => if (!(member == ws) member.send(msg.toString()););
   });
 
-//   ws.on('close', function() {
-//     workingWith[ws].forEach(member => workingWith[member] = workingWith[member].filter(m => m !== ws));
-//     delete workingWith[ws];
-//     groups[group] = groups[group].filter(m => m !== ws);
-//     if(groups[group].length == 0)
-//        delete groups[group];
-//   });
+  ws.on('close', function() {
+    groups[group] = groups[group].filter(member => member != ws);
+    if(groups[group].length == 0)
+       delete groups[group];
+  });
 });
 
 server.listen(80);
