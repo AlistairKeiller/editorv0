@@ -52,17 +52,18 @@ const ace = `<script src="http://ajaxorg.github.io/ace-builds/src-min/ace.js"></
 wss = new (require('ws').Server)({server: server});
 workingWith = {}, groups = {};
 wss.on('connection', function(ws, request) {
-  group = (new URLSearchParams(request.url.slice(1))).get('group');
-  if (!(group in groups))
-    groups[group] = [];
-  workingWith[ws] = groups[group];
-  for(member in groups[group])
-    workingWith[member].push(ws);
-  groups[group].push(ws);
+//   group = (new URLSearchParams(request.url.slice(1))).get('group');
+//   if (!(group in groups))
+//     groups[group] = [];
+//   workingWith[ws] = groups[group];
+//   for(member in groups[group])
+//     workingWith[member].push(ws);
+//   groups[group].push(ws);
+  test = ws;
   
-  console.log(ws);
-  console.log(groups);
-  console.log(workingWith);
+  console.log(test);
+//   console.log(groups);
+//   console.log(workingWith);
 
   ws.on('message', function(msg) {
     for(member in workingWith[ws])
