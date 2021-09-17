@@ -47,10 +47,12 @@ wss.on('connection', function(ws, request) {
   if (!(group in groups))
     groups[group] = [];
   workingWith[ws] = groups[group];
+  console.log(1, groups);
   groups[group].forEach(member => workingWith[member].push(ws));
+  console.log(2, groups);
   groups[group].push(ws);
   
-  console.log(groups);
+  console.log(3, groups);
 
   ws.on('message', function(msg) {
     workingWith[ws].forEach(member => member.send(msg.toString()));
