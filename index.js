@@ -50,7 +50,7 @@ wss.on('connection', function(ws, request) {
 //   groups[group].forEach(member => workingWith[member].push(ws));
   groups[group].push(ws);
   
-  console.log(Object.keys(groups));
+  console.log(groups);
 
   ws.on('message', function(msg) {
     workingWith[ws].forEach(member => member.send(msg.toString()));
