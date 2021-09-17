@@ -61,7 +61,7 @@ groups = {}, waitingForSet = [];
 wss.on('connection', function(ws, request) {
   group = request.url.slice(2);
   if (group in groups){
-    groups[group][0].send({action: "get"});
+    groups[group][0].send(JSON.stringify({action: "get"}));
     waitingForGet.push(ws);
   } else {
     groups[group] = [];
