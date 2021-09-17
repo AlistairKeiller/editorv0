@@ -15,7 +15,7 @@ const ace = `<script src="http://ajaxorg.github.io/ace-builds/src-min/ace.js"></
   editor.session.setMode("ace/mode/java");
   editor.setOptions({enableLiveAutocompletion: true});
   
-  const ws = new WebSocket('ws://54.193.138.138?name=test&pathname=' + window.location.pathname.slice(1));
+  const ws = new WebSocket('ws://54.193.138.138?group=' + window.location.pathname.slice(1));
   eventsOn = true;
 
   ws.onopen = function() {
@@ -50,13 +50,33 @@ const ace = `<script src="http://ajaxorg.github.io/ace-builds/src-min/ace.js"></
 })
 
 wss = new (require('ws').Server)({server: server});
-
+workingWith = {}, groups = {};
 wss.on('connection', function(ws, request) {
-  console.log(request.url)
-  console.log(request.method)
-//   socket.on('message', function(msg) {
-// //     sockets.filter(s => s !== socket).forEach(s => s.send(msg.toString()));
-//   });
+  group = (new URLSearchParams(request.url.slice(1))).get('group');
+  if (group in groups) {
+    workingWith[ws] = groups[group]
+    for(member in groups[group])
+      workingwith[member].append(ws);
+    groups[group].append(ws);
+  } else{
+    groups[group] = [ws];
+    workingWith[ws] = [];
+  }
+
+  ws.on('message', function(msg) {
+    for(member in workingWith[ws])
+      member.send(msg.toString());
+  });
+
+  ws.on('close', function() {
+    for(member in workingWith[ws])
+      workingWith[member] = workingWith[member].filter(m => m !== ws);
+    delete workingWith[ws];
+    groups[group] = groups[group].filter(m => m !== ws);
+    if(groups[group].length == 0)
+       delete groups[group];
+    sockets = sockets.filter(s => s !== socket);
+  });
 });
 
 server.listen(80);
