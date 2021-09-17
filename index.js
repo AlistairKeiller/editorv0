@@ -54,13 +54,13 @@ wss.on('connection', function(ws, request) {
     workingWith[ws].forEach(member => member.send(msg.toString()));
   });
 
-  ws.on('close', function() {
-    workingWith[ws].forEach(member => workingWith[member] = workingWith[member].filter(m => m !== ws));
-    delete workingWith[ws];
-    groups[group] = groups[group].filter(m => m !== ws);
-    if(groups[group].length == 0)
-       delete groups[group];
-  });
+//   ws.on('close', function() {
+//     workingWith[ws].forEach(member => workingWith[member] = workingWith[member].filter(m => m !== ws));
+//     delete workingWith[ws];
+//     groups[group] = groups[group].filter(m => m !== ws);
+//     if(groups[group].length == 0)
+//        delete groups[group];
+//   });
 });
 
 server.listen(80);
