@@ -71,18 +71,21 @@ wss.on('connection', function(ws, request) {
 
   ws.on('message', function(msg) {
     msg = msg.toString();
-    if (JSON.parse(msg).action == "set")
+    if (JSON.parse(msg).action == "set"){
       waitingForSet.forEach(member => member.send(msg))
+      waitingForSet = [];
+    }
     else
       groups[group].forEach(member => {if (member != ws) member.send(msg)});
   });
 
   ws.on('close', function() {
-//     filteredgroup = groups[group]
     groups[group] = groups[group].filter(member => member != ws);
-//     groups[group] = groups[group].filter(member => member != ws);
-    if(groups[group].length == 0)
+    console.log("test")
+    if(groups[group].length == 0){
        delete groups[group];
+      console.log("test2")
+    }
   });
 });
 
