@@ -55,7 +55,7 @@ const ace = `<script src="http://ajaxorg.github.io/ace-builds/src-min/ace.js"></
 </script>`, server = require('http').createServer(function (req, res) {
   switch (req.url){
     case "/":
-      res.writeHead(302, {location: Math.random().toString().slice(1)});
+      res.writeHead(302, {location: Math.random().toString().slice(2)});
       res.end();
       break;
     default:
@@ -66,7 +66,7 @@ const ace = `<script src="http://ajaxorg.github.io/ace-builds/src-min/ace.js"></
 wss = new (require('ws').Server)({server: server});
 groups = {}, waitingForSet = [];
 wss.on('connection', function(ws, request) {
-  group = request.url.slice(2);
+  group = request.url.slice(1);
   if (group in groups){
     groups[group][0].send(JSON.stringify({action: "get"}));
     waitingForSet.push(ws);
