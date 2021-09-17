@@ -1,66 +1,11 @@
-const ace = `<script src="http://ajaxorg.github.io/ace-builds/src-min/ace.js"></script><script src="http://ajaxorg.github.io/ace-builds/src-min/ext-language_tools.js"></script>
-<style>#editor {
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-}</style>
-
-<div id="editor"></div>
-
-<script>require("ace/ext/language_tools");
-  editor = ace.edit("editor");
-  editor.setTheme("ace/theme/dracula");
-  editor.session.setMode("ace/mode/java");
-  editor.setOptions({enableLiveAutocompletion: true});
-
-  const ws = new WebSocket('ws://54.193.138.138/' + window.location.pathname.slice(1));
-  events = true;
-
-  ws.onopen = function() {
-    editor.session.on('change', function(delta) {
-      if (events) {
-        switch (delta.action){
-          case "remove":
-            delta = ws.send(JSON.stringify({action: "remove", start: delta.start, end: delta.end}));
-            break;
-          case "insert":
-            delta = ws.send(JSON.stringify({action: "insert", start: delta.start, lines: delta.lines.join("\\n")}));
-            break;
-        }
-      }
-    });
-  };
-
-  ws.onmessage = function(msg) {
-    msg = JSON.parse(msg.data);
-    switch (msg.action){
-      case "remove":
-        events = false;
-        editor.session.remove({start: msg.start, end: msg.end});
-        events = true;
-        break;
-      case "insert":
-        events = false;
-        editor.session.insert(msg.start, msg.lines);
-        events = true;
-        break;
-      case "get":
-        ws.send(JSON.stringify({action: "set", value: editor.getValue()}));
-        break;
-      case "set":
-        events = false;
-        editor.setValue(msg.value, -1);
-        events = true;
-        break;
-    }
-  };
-</script>`, basic = `class Main {
+basic = `class Main {
   public static void main(String[] args) {
     System.out.println("Hello world!");
   }
-}`
+}`, ace = '';
+
+
+
 server = require('http').createServer(function (req, res) {
   switch (req.url){
     case "/":
