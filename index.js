@@ -38,7 +38,7 @@ const ace = `<script src="http://ajaxorg.github.io/ace-builds/src-min/ace.js"></
     events = false;
     switch (msg.action){
       case "remove":
-        editor.session.remove(msg);
+        editor.session.remove({msg.start, msg.end});
         break;
       case "insert":
         editor.session.insert(msg.start, msg.lines);
