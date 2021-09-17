@@ -68,23 +68,26 @@ server = require('http').createServer(function (req, res) {
   }
 })
 
-groups = {}, waitingForSet = [];
+groups = {}, waitingForSet = {};
 (new (require('ws').Server)({server: server})).on('connection', function(ws, request) {
   group = request.url.slice(1);
   if (group in groups){
-    groups[group][0].send(JSON.stringify({action: "get"}));
-    waitingForSet.push(ws);
+    if (group in waitingForSet)
+      waitingForSet[group].push(ws);
+    else{
+      groups[group][0].send(JSON.stringify({action: "get"}));
+      waitingForSet[group] = [ws];
+    }
   } else {
-    groups[group] = [];
     ws.send(JSON.stringify({action: "set", value: basic}));
+    groups[group] = [ws];
   }
-  groups[group].push(ws);
 
   ws.on('message', function(msg) {
     msg = msg.toString();
     if (JSON.parse(msg).action == "set"){
-      waitingForSet.forEach(member => member.send(msg))
-      waitingForSet = [];
+      waitingForSet[group].forEach(member => {member.send(msg); groups[group].push(member);})
+      delete waitingForSet[group];
     }
     else
       groups[group].forEach(member => {if (member != ws) member.send(msg)});
