@@ -63,7 +63,7 @@ wss.on('connection', function(ws, request) {
   test[1].push(ws)
   
   console.log(test[1][0] == ws);
-  console.log(test)
+  console.log(test[1][0]);
 //   console.log(groups);
 //   console.log(workingWith);
 
