@@ -37,15 +37,6 @@ const ace = `<script src="http://ajaxorg.github.io/ace-builds/src-min/ace.js"></
 </script>`, settings = `
 
 `, server = require('http').createServer(function (req, res) {
-//   extention = req.url.slice(1);
-//   if (extention == "settings") {
-    
-//   }
-//   if (parseInt(extention)) {
-//     port = parseInt(extention);
-    
-//   } else  else {
-//   }
   res.end(ace);
 })
 
