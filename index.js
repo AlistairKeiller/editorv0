@@ -68,9 +68,8 @@ server = require('http').createServer(function (req, res) {
   }
 })
 
-wss = new (require('ws').Server)({server: server});
 groups = {}, waitingForSet = [];
-wss.on('connection', function(ws, request) {
+(new (require('ws').Server)({server: server})).on('connection', function(ws, request) {
   group = request.url.slice(1);
   if (group in groups){
     groups[group][0].send(JSON.stringify({action: "get"}));
