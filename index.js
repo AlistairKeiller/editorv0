@@ -72,7 +72,7 @@ wss.on('connection', function(ws, request) {
   ws.on('message', function(msg) {
     msg = msg.toString();
     if (JSON.parse(msg).action == "set")
-      waitingForSet.forEach(memeber => member.send(msg))
+      waitingForSet.forEach(member => member.send(msg))
     else
       groups[group].forEach(member => {if (member != ws) member.send(msg)});
   });
