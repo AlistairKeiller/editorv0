@@ -89,7 +89,7 @@ groups = {}, waitingForSet = {};
       waitingForSet[group].forEach(member => {member.send(msg); groups[group].push(member);})
       delete waitingForSet[group];
     } else
-      groups[group].forEach(member => {if (member != ws) member.send(msg)});
+      groups[group].forEach(member => {if (member != ws) member.send(msg);});
   });
 
   ws.on('close', function() {
