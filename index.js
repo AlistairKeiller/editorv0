@@ -56,7 +56,7 @@ wss.on('connection', function(ws, request) {
   if (!(group in groups))
     groups[group] = [];
   else
-    console.log(groups[group][0] == Object.keys(workingwith)[0]);
+    console.log(groups[group][0] == Object.keys(workingWith)[0]);
   workingWith[ws] = groups[group];
   groups[group].push(ws);
 
