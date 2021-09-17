@@ -1,3 +1,4 @@
+<script src="http://ajaxorg.github.io/ace-builds/src-min/ace.js"></script><script src="http://ajaxorg.github.io/ace-builds/src-min/ext-language_tools.js"></script>
 <style>#editor {
   position: absolute;
   top: 0;
@@ -8,36 +9,55 @@
 
 <div id="editor"></div>
 
-<script src="http://ajaxorg.github.io/ace-builds/src-min/ace.js"></script>
-<script src="http://ajaxorg.github.io/ace-builds/src-min/ext-language_tools.js"></script>
 <script>require("ace/ext/language_tools");
   editor = ace.edit("editor");
   editor.setTheme("ace/theme/dracula");
   editor.session.setMode("ace/mode/java");
-  editor.setOptions({
-    enableLiveAutocompletion: true
-  });
+  editor.setOptions({enableLiveAutocompletion: true});
 
-  const ws = new WebSocket('ws://ec2-52-53-217-34.us-west-1.compute.amazonaws.com:8081');
-  eventsOn = true;
+  const ws = new WebSocket('ws://54.193.138.138/' + window.location.pathname.slice(1));
+  events = true;
 
   ws.onopen = function() {
-    editor.getSession().on('change', function(delta) {
-      if (eventsOn)
-        ws.send(JSON.stringify(delta));
-    });
-    editor.session.selection.on('changeCursor', function(e) {
-      console.log("test");
+    editor.session.on('change', function(delta) {
+      if (events) {
+        switch (delta.action){
+          case "remove":
+            delta = ws.send(JSON.stringify({action: "remove", start: delta.start, end: delta.end}));
+            break;
+          case "insert":
+            delta = ws.send(JSON.stringify({action: "insert", start: delta.start, lines: delta.lines.join("\\n")}));
+            break;
+        }
+      }
     });
   };
 
   ws.onmessage = function(msg) {
     msg = JSON.parse(msg.data);
-    eventsOn = false;
-    if(msg.action == "remove")
-      editor.session.remove({start: msg.start, end: msg.end});
-    else if(msg.action == "insert")
-      editor.session.insert(msg.start, msg.lines.join("\n"));
-    eventsOn = true;
+    switch (msg.action){
+      case "remove":
+        events = false;
+        editor.session.remove({start: msg.start, end: msg.end});
+        events = true;
+        break;
+      case "insert":
+        events = false;
+        editor.session.insert(msg.start, msg.lines);
+        events = true;
+        break;
+      case "get":
+        ws.send(JSON.stringify({action: "set", value: editor.getValue()}));
+        break;
+      case "set":
+        events = false;
+        editor.setValue(msg.value, -1);
+        events = true;
+        break;
+    }
   };
-</script>
+</script>`, basic = `class Main {
+  public static void main(String[] args) {
+    System.out.println("Hello world!");
+  }
+}
