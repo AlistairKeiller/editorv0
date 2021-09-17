@@ -60,6 +60,7 @@ wss.on('connection', function(ws, request) {
     workingWith[member].push(ws);
   groups[group].push(ws);
   
+  console.log(ws);
   console.log(groups);
   console.log(workingWith);
 
