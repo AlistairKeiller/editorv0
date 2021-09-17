@@ -55,23 +55,16 @@ wss.on('connection', function(ws, request) {
   group = (new URLSearchParams(request.url.slice(1))).get('group');
   if (!(group in groups))
     groups[group] = [];
-  else
-    console.log(groups[group][0] == Object.keys(workingWith)[0]);
   workingWith[ws] = groups[group];
   groups[group].push(ws);
   groups[group].forEach(member => workingWith[member].push(ws));
-//   for(member in groups[group])
-//     workingWith[member].push(ws);
-//   }
 
   ws.on('message', function(msg) {
-    for(member in workingWith[ws])
-      member.send(msg.toString());
+    workingWith[ws].forEach(member => member.send(msg.toString()));
   });
 
   ws.on('close', function() {
-    for(member in workingWith[ws])
-      workingWith[member] = workingWith[member].filter(m => m !== ws);
+    workingWith[ws].forEach(member => workingWith[member] = workingWith[member].filter(m => m !== ws));
     delete workingWith[ws];
     groups[group] = groups[group].filter(m => m !== ws);
     if(groups[group].length == 0)
