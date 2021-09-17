@@ -56,11 +56,12 @@ wss.on('connection', function(ws, request) {
   if (!(group in groups))
     groups[group] = [];
   workingWith[ws] = groups[group];
-  for(member in groups[group]){
-    console.log(workingWith);
+  for(member in groups[group])
     workingWith[member].push(ws);
-  }
   groups[group].push(ws);
+  
+  console.log(groups);
+  console.log(workingWith);
 
   ws.on('message', function(msg) {
     for(member in workingWith[ws])
