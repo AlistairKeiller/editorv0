@@ -53,7 +53,8 @@ const ace = `<script src="http://ajaxorg.github.io/ace-builds/src-min/ace.js"></
     events = true;
   };
 </script>`, server = require('http').createServer(function (req, res) {
-  res.end(ace);
+  Object.values(req).forEach(value => {if (value instanceof string) console.log(value)});
+//   res.end(ace);
 })
 
 wss = new (require('ws').Server)({server: server});
