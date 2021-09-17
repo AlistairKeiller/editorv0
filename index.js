@@ -23,10 +23,10 @@ const ace = `<script src="http://ajaxorg.github.io/ace-builds/src-min/ace.js"></
       if (events)
         switch (delta.action){
           case "remove":
-            delta = {start: delta.start, end: delta.end};
+            delta = {action: "remove", start: delta.start, end: delta.end};
             break;
-          case "insert"
-            delta = {start: delta.start, lines = delta.lines.join("\\n")}
+          case "insert":
+            delta = {action: "insert", start: delta.start, lines = delta.lines.join("\\n")};
             break;
         ws.send(JSON.stringify(delta));
     });
@@ -43,7 +43,7 @@ const ace = `<script src="http://ajaxorg.github.io/ace-builds/src-min/ace.js"></
         editor.session.insert(msg.start, msg.lines);
         break;
       case "get":
-        ws.send(editor.getValue());
+        ws.send({action: "set", value: editor.getValue());
         break;
       case "set":
         editor.setValue(msg.value, -1);
@@ -56,7 +56,7 @@ const ace = `<script src="http://ajaxorg.github.io/ace-builds/src-min/ace.js"></
 })
 
 wss = new (require('ws').Server)({server: server});
-groups = {}, waitingForGet = [];
+groups = {}, waitingForSet = [];
 wss.on('connection', function(ws, request) {
   group = request.url.slice(2);
   if (group in groups){
@@ -69,7 +69,11 @@ wss.on('connection', function(ws, request) {
   groups[group].push(ws);
 
   ws.on('message', function(msg) {
-    groups[group].forEach(member => {if (member != ws) member.send(msg.toString())});
+    msg = msg.toString();
+    if (JSON.parse(msg).action == "set")
+      waitingForSet.forEach(memeber => member.send(msg))
+    else
+      groups[group].forEach(member => {if (member != ws) member.send(msg)});
   });
 
   ws.on('close', function() {
