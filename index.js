@@ -26,7 +26,7 @@ const ace = `<script src="http://ajaxorg.github.io/ace-builds/src-min/ace.js"></
             delta = {action: "remove", start: delta.start, end: delta.end};
             break;
           case "insert":
-            delta = {action: "insert", start: delta.start, lines = delta.lines.join("\\n")};
+            delta = {action: "insert", start: delta.start, lines: delta.lines.join("\\n")};
             break;
         ws.send(JSON.stringify(delta));
     });
