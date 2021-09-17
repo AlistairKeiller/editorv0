@@ -67,7 +67,6 @@ wss = new (require('ws').Server)({server: server});
 groups = {}, waitingForSet = [];
 wss.on('connection', function(ws, request) {
   group = request.url.slice(2);
-  console.log(group);
   if (group in groups){
     groups[group][0].send(JSON.stringify({action: "get"}));
     waitingForSet.push(ws);
