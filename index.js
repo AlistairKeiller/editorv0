@@ -55,11 +55,14 @@ wss.on('connection', function(ws, request) {
   group = (new URLSearchParams(request.url.slice(1))).get('group');
   if (!(group in groups))
     groups[group] = [];
+  else
+    console.log(groups[group][0]);
   workingWith[ws] = groups[group];
-  for(member in groups[group]){
-    console.log(groups[group]);
-//     workingWith[member].push(ws);
-  }
+  
+//   for(member in groups[group]){
+    
+// //     workingWith[member].push(ws);
+//   }
   groups[group].push(ws);
 
   ws.on('message', function(msg) {
