@@ -60,7 +60,6 @@ wss.on('connection', function(ws, request) {
     groups[group] = groups[group].filter(m => m !== ws);
     if(groups[group].length == 0)
        delete groups[group];
-    sockets = sockets.filter(s => s !== socket);
   });
 });
 
