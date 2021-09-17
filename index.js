@@ -44,7 +44,7 @@ const ace = `<script src="http://ajaxorg.github.io/ace-builds/src-min/ace.js"></
         editor.session.insert(msg.start, msg.lines);
         break;
       case "get":
-        ws.send({action: "set", value: editor.getValue());
+        ws.send({action: "set", value: editor.getValue()});
         break;
       case "set":
         editor.setValue(msg.value, -1);
